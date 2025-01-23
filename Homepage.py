@@ -21,8 +21,8 @@ st.markdown(
 
 # Load CSV data
 def load_data():
-    file_path = "Tohka AMG - Anime List.csv"
-    return pd.read_csv(file_path)
+    url = "https://raw.githubusercontent.com/Tohka-aryani/Klukai/refs/heads/main/Tohka%20AMG%20-%20Anime%20List.csv"
+    return pd.read_csv(url)
 
 # App Pages
 def introduction_page():
@@ -45,7 +45,7 @@ def anime_list_page(data):
 
     filtered_data = data
     if search_query:
-        filtered_data = filtered_data[filtered_data['Anime Name (EN)'].str.contains(search_query, case=False, na=False)]
+        filtered_data = filtered_data[filtered_data['Title'].str.contains(search_query, case=False, na=False)]
     if genre_filter:
         filtered_data = filtered_data[filtered_data['Genre'].isin(genre_filter)]
     if watch_status_filter != "All":
@@ -71,8 +71,6 @@ def faq_page():
     st.write("You can filter the anime list by genre or watch status using the dropdown menus.")
     st.write("### What should I do if I encounter an issue?")
     st.write("Please contact our support team or leave feedback in the app.")
-    st.write("### How often is the list updated?")
-    st.write("Once every week or once every two weeks.")
 
 def statistics_page(data):
     st.write("## Anime Statistics")
