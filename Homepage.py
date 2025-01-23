@@ -61,6 +61,18 @@ def anime_list_page(data):
     if 'Image' in filtered_data.columns:
         filtered_data['Image'] = filtered_data['Image'].apply(render_image)
 
+    # Add CSS to center-align table headers
+    st.markdown(
+        """
+        <style>
+        .styled-table thead th {
+            text-align: center !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.write(f"### {len(filtered_data)} results found")
     st.markdown(
         filtered_data.to_html(escape=False, index=False, classes="styled-table"),
@@ -68,7 +80,7 @@ def anime_list_page(data):
     )
 
 
-
+    
 def faq_page():
     st.write("## Frequently Asked Questions (FAQ)")
     st.write("### How do I search for an anime?")
