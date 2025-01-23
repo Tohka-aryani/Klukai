@@ -61,12 +61,15 @@ def anime_list_page(data):
     if 'Image' in filtered_data.columns:
         filtered_data['Image'] = filtered_data['Image'].apply(render_image)
 
-    # Add CSS to center-align table headers
+    # Add CSS to center-align all table content except the Image column
     st.markdown(
         """
         <style>
-        .styled-table thead th {
+        .styled-table th, .styled-table td {
             text-align: center !important;
+        }
+        .styled-table td:nth-child(3) {
+            text-align: left !important;
         }
         </style>
         """,
@@ -80,15 +83,18 @@ def anime_list_page(data):
     )
 
 
-    
+
+
 def faq_page():
     st.write("## Frequently Asked Questions (FAQ)")
     st.write("### How do I search for an anime?")
     st.write("Use the search bar on the Anime List page to find specific titles.")
+    st.write("### Why did you give this anime a low rating & etc?")
+    st.write("All ratings are subjective and based on my personal preference only.")
     st.write("### How can I filter the anime list?")
     st.write("You can filter the anime list by genre or watch status using the dropdown menus.")
     st.write("### What should I do if I encounter an issue?")
-    st.write("Please contact our support team or leave feedback in the app.")
+    st.write("Please contact @tohka_aryani [that's me] for any issues or feedback.")
 
 def statistics_page(data):
     st.write("## Anime Statistics")
