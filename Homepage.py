@@ -22,7 +22,11 @@ st.markdown(
 # Load CSV data
 def load_data():
     file_path = "Tohka AMG - Anime List.csv"
-    return pd.read_csv(file_path)
+    data = pd.read_csv(file_path)
+    # Replace empty Notes with "No comment at this time"
+    if 'Notes' in data.columns:
+        data['Notes'] = data['Notes'].fillna("No comment at this time")
+    return data
 
 # App Pages
 def introduction_page():
@@ -81,9 +85,6 @@ def anime_list_page(data):
         filtered_data.to_html(escape=False, index=False, classes="styled-table"),
         unsafe_allow_html=True
     )
-
-
-
 
 def faq_page():
     st.write("## Frequently Asked Questions (FAQ)")
