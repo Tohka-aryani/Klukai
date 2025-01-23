@@ -56,7 +56,7 @@ def anime_list_page(data):
         filtered_data = filtered_data[filtered_data['Watch Status'] == watch_status_filter]
 
     def render_image(url):
-        return f'<img src="{url}" width="300" style="border-radius:5px;">' if pd.notna(url) else ''
+        return f'<img src="{url}" width="200" style="border-radius:5px;">' if pd.notna(url) else ''
 
     if 'Image' in filtered_data.columns:
         filtered_data['Image'] = filtered_data['Image'].apply(render_image)
