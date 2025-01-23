@@ -40,14 +40,18 @@ def anime_list_page(data):
     st.write("## Anime List")
 
     search_query = st.text_input("Search for an anime:", "")
-    genre_filter = st.selectbox("Filter by Genre:", ["All"] + list(data['Genre'].unique()))
+    genre_filter = st.selectbox("Filter by Genre:", ["All"] + sorted(set(genre.strip() for sublist in data['Genre'].dropna().str.split(',') for genre in sublist)))
     watch_status_filter = st.selectbox("Filter by Watch Status:", ["All"] + list(data['Watch Status'].unique()))
 
     filtered_data = data
+
     if search_query:
         filtered_data = filtered_data[filtered_data['Title'].str.contains(search_query, case=False, na=False)]
+    
     if genre_filter != "All":
-        filtered_data = filtered_data[filtered_data['Genre'] == genre_filter]
+        # Filter rows where the selected genre is present in the Genre column
+        filtered_data = filtered_data[filtered_data['Genre'].str.contains(fr'\b{genre_filter}\b', case=False, na=False)]
+    
     if watch_status_filter != "All":
         filtered_data = filtered_data[filtered_data['Watch Status'] == watch_status_filter]
 
@@ -62,6 +66,7 @@ def anime_list_page(data):
         filtered_data.to_html(escape=False, index=False, classes="styled-table"),
         unsafe_allow_html=True
     )
+
 
 
 def faq_page():
