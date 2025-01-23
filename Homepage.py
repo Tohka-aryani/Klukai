@@ -21,8 +21,8 @@ st.markdown(
 
 # Load CSV data
 def load_data():
-    url = "https://raw.githubusercontent.com/Tohka-aryani/Klukai/refs/heads/main/Tohka%20AMG%20-%20Anime%20List.csv"
-    return pd.read_csv(url)
+    file_path = "Tohka AMG - Anime List.csv"
+    return pd.read_csv(file_path)
 
 # App Pages
 def introduction_page():
